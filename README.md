@@ -3,37 +3,36 @@
 
 **Skriv din rapport här!**
 
-_Du kan ta bort all text som finns sedan tidigare_.
+Började med att skapa en ny activity. Sedan skapade jag en edittext och två knappar
+i den nya activityn. Sedan gjorde jag så att en knapp tar dig tillbaka till main activityn,
+och en annan knapp som sparar texten man skriver in i edittext. Med hjälp av onResume()
+så visar sedan MainActivity texten som sparades i min andra activity. 
 
-## Följande grundsyn gäller dugga-svar:
-
-- Ett kortfattat svar är att föredra. Svar som är längre än en sida text (skärmdumpar och programkod exkluderat) är onödigt långt.
-- Svaret skall ha minst en snutt programkod.
-- Svaret skall inkludera en kort övergripande förklarande text som redogör för vad respektive snutt programkod gör eller som svarar på annan teorifråga.
-- Svaret skall ha minst en skärmdump. Skärmdumpar skall illustrera exekvering av relevant programkod. Eventuell text i skärmdumpar måste vara läsbar.
-- I de fall detta efterfrågas, dela upp delar av ditt svar i för- och nackdelar. Dina för- respektive nackdelar skall vara i form av punktlistor med kortare stycken (3-4 meningar).
-
-Programkod ska se ut som exemplet nedan. Koden måste vara korrekt indenterad då den blir lättare att läsa vilket gör det lättare att hitta syntaktiska fel.
 
 ```
-function errorCallback(error) {
-    switch(error.code) {
-        case error.PERMISSION_DENIED:
-            // Geolocation API stöds inte, gör något
-            break;
-        case error.POSITION_UNAVAILABLE:
-            // Misslyckat positionsanrop, gör något
-            break;
-        case error.UNKNOWN_ERROR:
-            // Okänt fel, gör något
-            break;
+@Override
+    public void onResume() {
+        super.onResume();
+        SharedPreferences sharedPreferences = getSharedPreferences(SecondActivity.editedText, MODE_PRIVATE);
+        String textSecond = sharedPreferences.getString(SecondActivity.editedText, "");
+        textView.setText(textSecond);
     }
-}
+    
+
+
+    public void saveText() {
+        SharedPreferences sharedPref = getSharedPreferences(editedText, MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putString(editedText, editText.getText().toString()).apply();
+    }
+
 ```
 
 Bilder läggs i samma mapp som markdown-filen.
 
-![](android.png)
+![](Screenshot_20230508_152613.png)
+![](Screenshot_20230508_152640.png)
+![](Screenshot_20230508_152647.png)
 
 Läs gärna:
 
